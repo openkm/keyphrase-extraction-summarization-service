@@ -1,2 +1,1 @@
-# keyphrase-extraction-summarization-service
-Keyphrase extraction sumarization service
+# OpenKM keyphrase extraction summarization service
