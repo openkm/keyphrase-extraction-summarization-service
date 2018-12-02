@@ -29,7 +29,7 @@
   <properties>
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <openkm-sdk4j.version>2.6</openkm-sdk4j.version>
+    <openkm-sdk4j.version>1.2</openkm-sdk4j.version>
     <javax.mail.version>1.5.2</javax.mail.version>
     <commons-io.version>2.5</commons-io.version>
     <commons-lang.version>3.4</commons-lang.version>
@@ -143,6 +143,13 @@
           <artifactId>slf4j-log4j12</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    
+    <!-- Gson: Java to Json conversion -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.5</version>
     </dependency>
 
     <!-- Misc -->
