@@ -10,12 +10,12 @@ package com.openkm.cache.impl;
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * #L%
@@ -24,7 +24,6 @@ package com.openkm.cache.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -46,15 +45,8 @@ public class WSCacheDAOImpl implements WSCacheDAO {
 	public WSCacheDAOImpl() {
 	}
 
-	private String okmUrl;
-
 	@Autowired
-	private Config configService;
-
-	@Autowired
-	public WSCacheDAOImpl(@Value("${openkm.url}") String okmUrl) {
-		this.okmUrl = okmUrl;
-	}
+	private Config config;
 
 	@Override
 	@Cacheable(value = "wsCache", key = "#username")
@@ -62,10 +54,10 @@ public class WSCacheDAOImpl implements WSCacheDAO {
 		OKMWebservices ws = null;
 
 		if (username.equals(ADMIN_USER)) {
-			ws = OKMWebservicesFactory.newInstance(okmUrl, configService.ADMIN_USER, configService.ADMIN_PASSWORD);
+			ws = OKMWebservicesFactory.newInstance(config.OPENKM_URL, config.ADMIN_USER, config.ADMIN_PASSWORD);
 		} else {
 			String password = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getPassword();
-			ws = OKMWebservicesFactory.newInstance(okmUrl, username, password);
+			ws = OKMWebservicesFactory.newInstance(config.OPENKM_URL, username, password);
 		}
 
 		return ws;
@@ -82,7 +74,7 @@ public class WSCacheDAOImpl implements WSCacheDAO {
 	@Cacheable(value = "wsCache", key = "#username")
 	public OKMWebservices setOKMWebservices(String username, String password) {
 		logger.info("set OKMWebservices object for the first time in the cache for username " + username);
-		OKMWebservices ws = OKMWebservicesFactory.newInstance(okmUrl, username, password);
+		OKMWebservices ws = OKMWebservicesFactory.newInstance(config.OPENKM_URL, username, password);
 		return ws;
 	}
 }
