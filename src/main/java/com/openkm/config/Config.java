@@ -1,5 +1,7 @@
 package com.openkm.config;
 
+import java.io.File;
+
 /*-
  * #%L
  * kea-summarization
@@ -10,12 +12,12 @@ package com.openkm.config;
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * #L%
@@ -73,6 +75,13 @@ public class Config {
 	@Value("${kea.summarization.thesaurus.tree.childs}")
 	public String THESAURUS_TREE_CHILDS;
 
+	@Value("${catalina.home}")
+	public String TOMCAT_HOME;
+
+	public String getTrainingFolderPath() {
+		return TOMCAT_HOME + File.separator + "training";
+	}
+
 	@Value("${application.test.url}")
 	public String APPLICATION_TEST_URL;
 
@@ -82,5 +91,13 @@ public class Config {
 			url += "/";
 		}
 		return url + "rest/summarization/keywords";
+	}
+
+	public String getTrainingUrl() {
+		String url = APPLICATION_TEST_URL;
+		if (!url.endsWith("/")) {
+			url += "/";
+		}
+		return url + "rest/training/file";
 	}
 }

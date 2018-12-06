@@ -1,5 +1,7 @@
 package com.openkm.kea;
 
+import java.io.File;
+
 /*-
  * #%L
  * kea-summarization
@@ -10,12 +12,12 @@ package com.openkm.kea;
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * #L%
@@ -271,6 +273,14 @@ public class RDFREpository {
 	        }
 	        log.info("RDF repository started");
 
+	        log.info("Check training folder");
+	        File training = new File(config.getTrainingFolderPath());
+	        if (training.exists() && training.isDirectory()) {
+	        	log.info("Training folder exist:" + config.getTrainingFolderPath());
+	        } else {
+	        	training.mkdirs();
+	        	log.info("Created training folder:" + config.getTrainingFolderPath());
+	        }
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
