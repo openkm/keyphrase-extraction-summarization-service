@@ -25,12 +25,10 @@ import java.io.File;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by pavila on 15/05/17.
- */
-@Component
+@Configuration
 @ConfigurationProperties
 public class Config {
 	@Value("${openkm.url}")
@@ -47,6 +45,9 @@ public class Config {
 
 	@Value("${kea.summarization.thesaurus.skos.file}")
 	public String SKOS_FILE;
+
+	@Value("${kea.summarization.vocabulary.type}")
+	public String VOCABULARY_TYPE;
 
 	@Value("${kea.summarization.thesaurus.vocabulary.serql}")
 	public String VOCABULARY_SERQL;
@@ -75,11 +76,31 @@ public class Config {
 	@Value("${kea.summarization.thesaurus.tree.childs}")
 	public String THESAURUS_TREE_CHILDS;
 
+    @Value("${kea.summarization.stemmer.class}")
+    public String STEMMER_CLASS;
+
+    @Value("${kea.summarization.stopword.class}")
+    public String STOPWORD_CLASS;
+
+    @Value("${kea.summarization.language}")
+    public String LANGUAGE;
+
+    @Value("${kea.summarization.document.encoding}")
+    public String DOCUMENT_ENCODING;
+
 	@Value("${catalina.home}")
 	public String TOMCAT_HOME;
 
+	public String getModelsFolderPath() {
+		return getRootKeaConfigurationFolderPath() + File.separator + "models";
+	}
+
 	public String getTrainingFolderPath() {
-		return TOMCAT_HOME + File.separator + "training";
+		return getRootKeaConfigurationFolderPath() + File.separator + "training";
+	}
+
+	private String getRootKeaConfigurationFolderPath() {
+		return TOMCAT_HOME + File.separator + "kea";
 	}
 
 	@Value("${application.test.url}")

@@ -8,3 +8,5 @@
 <link rel="stylesheet" href="<c:url value='/static/css/bootstrap-datetimepicker.min.css'/>"> 
 <link rel="stylesheet" href="<c:url value='/static/css/bootstrap-select.min.css'/>">
 <link rel="stylesheet" href="<c:url value='/static/css/styles.css'/>">
+<script src="<c:url value='/static/js/jquery.min.js'/>"></script>
+<script src="<c:url value='/static/js/bootstrap.min.js'/>"></script>
