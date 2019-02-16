@@ -32,6 +32,7 @@ import java.nio.charset.StandardCharsets;
 
 import java.util.UUID;
 
+import com.openkm.util.FileUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

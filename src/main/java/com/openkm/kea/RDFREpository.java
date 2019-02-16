@@ -32,6 +32,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import com.openkm.util.FileUtils;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.MalformedQueryException;
 import org.openrdf.query.QueryEvaluationException;
@@ -259,6 +260,20 @@ public class RDFREpository {
 	public void RDFREpositoryInit() {
 //		new Thread(() -> {
 		try {
+            log.info("*** Creating kea folders structure ... ***");
+            if (!FileUtils.existDirectory(config.getTrainingFolderPath())) {
+                new File(config.getTrainingFolderPath()).mkdirs();
+                log.info(config.getTrainingFolderPath() + " has been created");
+            } else {
+                log.info(config.getTrainingFolderPath() + " yet exist");
+            }
+            if (!FileUtils.existDirectory(config.getModelsFolderPath())) {
+                new File(config.getModelsFolderPath()).mkdirs();
+                log.info(config.getModelsFolderPath() + " has been created");
+            } {
+                log.info(config.getModelsFolderPath() + " yet exist");
+            }
+
 			log.info("*** Starting repository ... ***");
 
 	    	if (!config.SKOS_FILE.equals("")) {
@@ -273,14 +288,6 @@ public class RDFREpository {
 	        }
 	        log.info("RDF repository started");
 
-	        log.info("Check training folder");
-	        File training = new File(config.getTrainingFolderPath());
-	        if (training.exists() && training.isDirectory()) {
-	        	log.info("Training folder exist:" + config.getTrainingFolderPath());
-	        } else {
-	        	training.mkdirs();
-	        	log.info("Created training folder:" + config.getTrainingFolderPath());
-	        }
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}

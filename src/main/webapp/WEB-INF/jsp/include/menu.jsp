@@ -23,8 +23,10 @@
               <li><a href="<c:url value='/admin/home'/>">Home</a></li>              
             </ul>
           </li>
+          <li><a href="<c:url value='/admin/model/home'/>">Model</a></li>
         </sec:authorize>
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
       <c:choose>
       	<c:when test="${not empty user}">
