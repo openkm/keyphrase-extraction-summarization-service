@@ -32,6 +32,7 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.env.OriginTrackedMapPropertySource;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.*;
 
@@ -62,16 +63,8 @@ public class PropertiesLogger {
 		for (PropertySource<?> propertySource : environment.getPropertySources()) {
 			if (propertySource instanceof PropertiesPropertySource) {
 				propertiesPropertySources.add((PropertiesPropertySource) propertySource);
-			} else if (propertySource instanceof MapPropertySource) {
-				// Discard system properties
-				if (!propertySource.getName().equals("systemProperties") && !propertySource.getName().equals("systemEnvironment")
-						&& !propertySource.getName().equals("random") && !propertySource.getName().equals("defaultProperties")) {
-					propertiesPropertySources.add((MapPropertySource) propertySource);
-				} else {
-					log.info("Properties not shown " + propertySource.getClass().toString() + " with name " + propertySource.getName());
-				}
-			} else {
-				log.info("Properties not shown " + propertySource.getClass().toString() + " with name " + propertySource.getName());
+			} else if (propertySource instanceof OriginTrackedMapPropertySource) {
+				propertiesPropertySources.add((OriginTrackedMapPropertySource) propertySource);
 			}
 		}
 		return propertiesPropertySources;
