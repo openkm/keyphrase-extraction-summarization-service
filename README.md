@@ -6,7 +6,7 @@ They describe the content of single documents and provide a kind of semantic met
 
 In libraries professional indexers select keyphrases from a controlled vocabulary (also called Subject Headings) according to defined cataloguing rules. On the Internet, digital libraries, or any depositories of data also use keyphrases (or here called content tags or content labels) to organize and provide a thematic access to their data.
 
-**[KEA](http://community.nzdl.org/kea/)** is an algorithm for extracting keyphrases from text documents. It can be either used for **free indexing** or for **indexing with a controlled vocabulary** build from The University of Waikato in the Digital Libraries and Machine Learning Labs of the Computer Science Department by **[Eibe Frank](http://www.cs.waikato.ac.nz/%7Eeibe/)** and **[Olena Modelyan](http://www.cs.waikato.ac.nz/%7Eolena/)**
+**[KEA](http://community.nzdl.org/kea/)** is an algorithm for extracting keyphrases from text documents. It can be either used for **free indexing** or for **indexing with a controlled vocabulary** build from The University of Waikato in the Digital Libraries and Machine Learning Labs of the Computer Science Department by **[Eibe Frank](http://www.cs.waikato.ac.nz/%7Eeibe/)** and **[Olena Medelyan](http://www.medelyan.com/)**
 
 OpenKM keyphrase extraction summarization service is an open-source software distributed under the **[GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html)**. 
 
