@@ -10,12 +10,12 @@ package com.openkm.config;
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * #L%
@@ -35,7 +35,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
@@ -47,7 +46,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.openkm.config.auth.CustomAuthenticationProvider;
 import com.openkm.config.auth.CustomLoginSuccessHandler;
 import com.openkm.config.auth.CustomLogoutSuccessHandler;
 
@@ -69,17 +67,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private CustomLogoutSuccessHandler customLogoutSuccessHandler;
 
 	@Autowired
-	private CustomAuthenticationProvider customAuthenticationProvider;
-
-	@Autowired
-	private UserDetailsService userDetailsService;
-
-	@Autowired
 	private Config config;
 
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(customAuthenticationProvider).userDetailsService(userDetailsService);
+		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+		auth.inMemoryAuthentication().withUser(config.ADMIN_USER).password(bcrypt.encode(config.ADMIN_PASSWORD)).roles("ADMIN");
 		auth.eraseCredentials(false);
 	}
 

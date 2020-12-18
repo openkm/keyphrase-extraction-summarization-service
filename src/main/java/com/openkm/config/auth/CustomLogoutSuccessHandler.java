@@ -28,12 +28,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.stereotype.Service;
-
-import com.openkm.cache.WSCacheDAO;
 
 /**
  * This class extends and implements spring-security classes to intercept and handle the logout process
@@ -44,14 +41,10 @@ import com.openkm.cache.WSCacheDAO;
 public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 	private static final Logger log = LoggerFactory.getLogger(CustomLogoutSuccessHandler.class);
 
-	@Autowired
-	private WSCacheDAO wsCache;
-
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException {
 		if (authentication != null && authentication.getDetails() != null) {
-			wsCache.evictOKMWebservices(authentication.getName());
 			log.debug("session before invalidate : " + request.getSession().getCreationTime());
 			request.getSession(false).invalidate();
 			log.debug("invalidate session");
