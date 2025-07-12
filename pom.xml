@@ -31,7 +31,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <javax.mail.version>1.5.2</javax.mail.version>
     <commons-io.version>2.14.0</commons-io.version>
-    <commons-lang.version>3.4</commons-lang.version>
+    <commons-lang.version>3.18.0</commons-lang.version>
     <start-class>com.openkm.MainAppConfig</start-class>
     <main.basedir>${basedir}/../..</main.basedir>
     <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
